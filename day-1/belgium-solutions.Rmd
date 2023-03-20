@@ -108,6 +108,8 @@ ggplot(aes(x = year, y = cases)) +
 
 7. Looking at the model diagnostics and the plot of the fitted values versus the data, identify a problem with this model. Describe the problem in a few words.
 
+
+
 8. Modify your model to account for the identified problem
 
     Hint: use ploynomials of `t`

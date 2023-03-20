@@ -2,11 +2,11 @@
 
 
 # Check version of R
-version
+version # need at least version 4.2
 
 # Update all installed packages 
 
-update.packages(ask = FALSE, checkBuilt = TRUE)
+update.packages(ask = FALSE, checkBuilt = TRUE) # takes a long time to run so only run once 
 
 # packages to install
 pkgs <- c("mgcv",  "brms", "qgam", "gamm4", "tidyverse", "readxl",
