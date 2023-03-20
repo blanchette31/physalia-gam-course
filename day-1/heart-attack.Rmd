@@ -101,11 +101,17 @@ null_dev <- summ$null.deviance
 
 ```{r gof-test}
 pchisq(deviance(m_ck), df.residual(m_ck), lower.tail = FALSE)
+
+
 ```
+very small probability that we would have a deviance this large and thus the model is poorly fitted for the data
+
 
 5. Plot the model diagnostics
 
 ```{r model diagnostics} 
+
+#alternative to layout code
 op <- par(mfrow = c(2,2))
 plot(m_ck)
 par(op)
@@ -167,7 +173,7 @@ par(op2)
 
 pchisq(deviance(m2_ck), df.residual(m2_ck), lower.tail = FALSE)
 ```
-
+good level of fit here could be slightly overfitted here
 
 
 10. Compare the two models using AIC and a generalized likelihood ratio test (GLRT). Which model is to be preferred?
