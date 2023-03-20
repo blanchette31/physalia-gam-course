@@ -193,14 +193,16 @@ pdatgam <- pdatgam %>%
          upper = ilinkgam(fit + (1.96 * se.fit)),
          lower = ilinkgam(fit - (1.96 * se.fit)))
 
-belgium %>%
-ggplot(aes(x = year, y = cases)) +
+plot_gam <- belgium %>%
+ggplot(aes(x = year, y = fitted)) +
   geom_ribbon(data = pdatgam,
               aes(ymin = lower, ymax = upper, x = year),
               alpha = 0.2, inherit.aes = FALSE) +
-  geom_point() +
+  geom_point(data = belgium, aes(x = year, y = cases)) +
   geom_line(data = pdatgam, aes(y = fitted, x = year)) +
   labs(x = "Creatinine kinase level", y = "Proportion Heart Attack")
+
+plot_gam + geom_line(data = pdat2, aes(colour = model))
 
 ```
 
