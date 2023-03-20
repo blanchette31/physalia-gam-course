@@ -175,3 +175,32 @@ deviance(m2)
 
 deviance(m1) - deviance(m2)
 ```
+
+## GAM
+
+```{r}
+gam <- gam(cases ~ s(t), data = belgium, family = poisson("log"), method = "REML")
+
+pdatgam <- with(belgium, tibble(t = seq(min(t), max(t), length = 100)))
+## want year for each t; remember to add 1980
+pdatgam <- pdatgam %>%
+  mutate(year = 1980 + t)
+predgam <- predict(gam, newdata = pdatgam, type = "link", se.fit = TRUE)
+ilinkgam <- family(gam)$linkinv
+pdatgam <- pdatgam %>%
+  bind_cols(data.frame(predgam)) %>%
+  mutate(fitted = ilinkgam(fit),
+         upper = ilinkgam(fit + (1.96 * se.fit)),
+         lower = ilinkgam(fit - (1.96 * se.fit)))
+
+belgium %>%
+ggplot(aes(x = year, y = cases)) +
+  geom_ribbon(data = pdatgam,
+              aes(ymin = lower, ymax = upper, x = year),
+              alpha = 0.2, inherit.aes = FALSE) +
+  geom_point() +
+  geom_line(data = pdatgam, aes(y = fitted, x = year)) +
+  labs(x = "Creatinine kinase level", y = "Proportion Heart Attack")
+
+```
+
