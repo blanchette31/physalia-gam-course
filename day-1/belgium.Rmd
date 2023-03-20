@@ -16,6 +16,10 @@ The data set `belgium-aids.csv` contains the number of cases (`cases`) of AIDS r
 ## Packages
 
 Load the following packages
+```{r}
+rm(list=ls())
+```
+
 
 ```{r load-packages}
 pkgs <- c("readr", "dplyr", "ggplot2", "here")
@@ -89,7 +93,7 @@ layout(1)
 
 6.  Add fitted values of the model as a line on to the plot you created earlier. Add a confidence interval to the fitted value line.
 
-```{r}
+```{r somePlot, echo=FALSE}
 pdat <- with(belgium, 
 						 tibble(t = seq(min(t),
 						 							 max(t),
@@ -130,7 +134,9 @@ ggplot(aes(x = year, y = cases)) +
 
 7.  Looking at the model diagnostics and the plot of the fitted values versus the data, identify a problem with this model. Describe the problem in a few words.
 
-The model does not seem to fit very well with the data at the end
+The model does not seem to fit very well with the data at the end.
+
+Residuals vs fitted graph shows a clear problem with the model the points should be spaced evenly. We have the wrong functional form for our model. It looks like we need a ^2 to fix it according to the residuals vs fitted graph
 
 8.  Modify your model to account for the identified problem
 
@@ -139,14 +145,69 @@ The model does not seem to fit very well with the data at the end
 ```{r}
 m2 <- glm(cases ~ poly(t, 2), data = belgium, family = poisson(link = "log"))
 
-#  or 
+##  or 
 
-m2a <- update(m1, . ~ . - t + poly(t, 2))
+m2b <- update(m1, . ~ . + I(t^2)) #this is less stable numerically so the first option is a bit better
+
+ #this is less stable numerically
 ```
     
 
 9.  Look at the model summary, model diagnostic plots, and perform the goodness of fit test on the residual deviance. Are there any problems with this model?
 
+```{r}
+# model summary
+summary(m2)
+# quick GOF test
+pchisq(deviance(m2), df.residual(m2), lower.tail = FALSE)
+# model diagnostics
+layout(matrix(1:4, ncol = 2, byrow = TRUE))
+plot(m2)
+layout(1)
+
+# plots
+pred <- predict(m2, newdata = pdat, type = "link", se.fit = TRUE)
+ilink <- family(m2)$linkinv
+pdat2 <- pdat %>%
+  select(-c(fit, se.fit, residual.scale)) %>% # remove m1 link scale fit & std err
+  bind_cols(data.frame(pred)) %>%
+  mutate(fitted = ilink(fit),
+         upper = ilink(fit + (1.96 * se.fit)),
+         lower = ilink(fit - (1.96 * se.fit))) %>%
+  bind_rows(pdat) %>%
+  mutate(model = rep(c("t^2","t"), each = 100))
+
+belgium %>%
+ggplot(aes(x = year, y = cases)) +
+  geom_ribbon(data = pdat2,
+              aes(ymin = lower, ymax = upper, x = year, fill = model),
+              alpha = 0.2, inherit.aes = FALSE) +
+  geom_point() +
+  geom_line(data = pdat2, aes(y = fitted, x = year, colour = model)) +
+  labs(x = "Creatinine kinase level", y = "Proportion Heart Attack") +
+  scale_fill_discrete(labels = scales::parse_format()) +
+  scale_colour_discrete(labels = scales::parse_format())
+```
+
+
 10. Compare the two models using AIC and a generalized likelihood ratio test (GLRT). Which model is to be preferred?
 
     Hint: the `anova()` function is used to do the GLRT
+    
+    
+    anova(m1, m2, test = "Chisq")
+
+```{r}
+anova(m1, m2, test = "Chisq")
+
+anova(m1, m2, test = "LRT")
+
+pchisq(71.446, df = 1, lower.tail = FALSE)
+
+deviance(m1)
+
+deviance(m2)
+
+deviance(m1) - deviance(m2)
+```
+

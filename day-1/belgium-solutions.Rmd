@@ -117,8 +117,9 @@ ggplot(aes(x = year, y = cases)) +
 ```{r}
 m2 <- glm(cases ~ poly(t, 2), data = belgium, family = poisson(link = "log"))
 
-## or
-m2a <- update(m1, . ~ . - t + poly(t, 2))
+## or 
+
+m2b <- update(m1, . ~ . + I(t^2)) #this is less stable numerically so the first option is a bit better
 ```
 
 9. Look at the model summary, model diagnostic plots, and perform the goodness of fit test on the residual deviance. Are there any problems with this model?
