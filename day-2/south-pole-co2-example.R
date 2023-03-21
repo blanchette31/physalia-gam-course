@@ -83,3 +83,7 @@ ggplot(aes(x = c.month, y = fitted)) +
     geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2) +
     geom_line(data = south, aes(c.month, co2), col = 'red') +
     geom_line(alpha = 0.4)
+
+
+#compare AICs
+AIC(m_co2, m2_co2)
