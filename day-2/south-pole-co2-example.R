@@ -78,7 +78,7 @@ new_df <- with(south,
 fv2 <- fitted_values(m2_co2, data = new_df, scale = "response")
 
 # and plot
-fv2 %>%
+p2 <- fv2 %>%
 ggplot(aes(x = c.month, y = fitted)) +
     geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2) +
     geom_line(data = south, aes(c.month, co2), col = 'red') +
@@ -87,3 +87,40 @@ ggplot(aes(x = c.month, y = fitted)) +
 
 #compare AICs
 AIC(m_co2, m2_co2)
+
+
+m3_co2 <-  gam(co2 ~ s(month, bs = "cc")+
+							 	s(c.month, bs = "cr", k = 150)+
+							 	ti(month, c.month, bs = c("cc", "cr"), k = c(10,30)),
+							 data = south, method = "REML", 
+							 knots = list(month = c(0.5, 12.5)))
+
+
+
+# model summary
+summary(m3_co2)
+
+# plot these two smooths
+draw(m3_co2, residuals = TRUE, rug = FALSE)
+
+# compare their complexities
+model_edf(m2_co2, m3_co2)
+
+# what about our forecasts
+nr <- nrow(south)
+new_df <- with(south,
+							 tibble(c.month = 1:(nr + 36),
+							 			 month = rep(seq_len(12), length = nr + 36)))
+fv3 <- fitted_values(m3_co2, data = new_df, scale = "response")
+
+# and plot
+p3 <- fv3 %>%
+	ggplot(aes(x = c.month, y = fitted)) +
+	geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2) +
+	geom_line(data = south, aes(c.month, co2), col = 'red') +
+	geom_line(alpha = 0.4)
+
+p2 + p3
+
+#compare AICs
+AIC(m_co2, m2_co2, m3_co2)

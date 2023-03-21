@@ -1,7 +1,6 @@
 # Portugese Larks example from slides
 
-rm(list = ls())
-
+# Run larks-example.R script before this one for graph at the end
 
 # packages
 library("readr")
@@ -111,3 +110,4 @@ fv %>%
 	geom_tile() +
 	scale_fill_viridis_c(option = "plasma") +
 	coord_equal()
+
