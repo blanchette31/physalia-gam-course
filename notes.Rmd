@@ -1,0 +1,28 @@
+---
+title: "Notes"
+author: "Brandon Blanchette"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Notes for GAMs course
+
+# Day 1
+
+Exercises : 
+
+Start will belgium.rmd then do heart-attack.rmd
+
+
+
+# Day 2 
+
+Slides : 
+
+
+
+

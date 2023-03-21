@@ -199,10 +199,16 @@ ggplot(aes(x = year, y = fitted)) +
               aes(ymin = lower, ymax = upper, x = year),
               alpha = 0.2, inherit.aes = FALSE) +
   geom_point(data = belgium, aes(x = year, y = cases)) +
-  geom_line(data = pdatgam, aes(y = fitted, x = year)) +
+  geom_line(data = pdatgam, aes(y = fitted, x = year, colour = "s(t)")) +
   labs(x = "Creatinine kinase level", y = "Proportion Heart Attack")
 
 plot_gam + geom_line(data = pdat2, aes(colour = model))
 
+```
+
+```{r}
+anova(gam, m2, method = "LRT")
+AIC(gam, m2)
+model_edf(gam, m2)
 ```
 
