@@ -5,6 +5,7 @@ library("readr")
 library("dplyr")
 library("mgcv")
 library("gratia")
+library("ggplot2")
 
 south_url <- "https://bit.ly/gam-south-pole-co2"
 south <- read_csv(south_url, col_types = "ddd")

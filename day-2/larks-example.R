@@ -6,6 +6,7 @@ library("dplyr")
 library("mgcv")
 library("gratia")
 library("patchwork")
+library("ggplot2")
 
 # read in the data
 larks_url <- "https://bit.ly/gam-larks"
