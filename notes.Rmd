@@ -21,8 +21,19 @@ Start will belgium.rmd then do heart-attack.rmd
 
 # Day 2 
 
+Exercises :
+
+Start with co2_south-pole-example then larks then linnets
+
+# Day 3
+
 Slides : 
 
+## 8
+Test to figure out if a non linear model is suitable for the data but in Gavin's opinion we should not have to do this because the penalty will not allow over wiggliness.
+
+## 11
+not all of the smooths can be used to estimate the second derivative as the penalty makes the second derivative as small as possible
 
 
 
