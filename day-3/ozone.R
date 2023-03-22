@@ -97,6 +97,8 @@ draw(sm_s_temp) +
         aes(y = value, x = temp, group = draw),
     alpha = 0.3, colour = "steelblue", size = 1)
 
+#none of the curves are linear or flat so this would never give us a linear term out of this so all of this data is non linear even though it looked like it could be
+
 # diagnostics
 appraise(m1, method = "simulate")
 # ah! non-constant variance
