@@ -143,3 +143,76 @@ KS test tells us if we have the correct distribution significant means we dont h
 
 this is what good model diagnostics looks like
 
+## 61
+
+we should be really careful about trying to get something really parsimonious
+
+##  67
+
+3rd arrow adding several variables that have no effect 
+
+very noisy situation 
+
+## 68 
+
+edf for all the terms that have no effect have all been shrunk to 0 or almost 0 so are basically all out of the model 
+
+## 69
+
+scales = fixed gives us all the same scales for all the plots
+
+## 74
+expected value of temperature : E
+
+F(TOD) = water temperature will vary depending on time of day it was sampled
+
+f(DOY) = water temperature will vary throughout the year
+
+f(Year) = long term water temperature variation 
+
+
+## 75
+f(x,y,TOD) effect of time of day might be different depending on location
+
+##78 
+we use ti here so it doesnt include the main effects multiple times in the model ti() does not include the main effect of a variable so we can use it s() to add the main effects and ti() to add the interactions between the variables
+
+knots upper limit set to 366.5 to get predictions for years with leap years 
+
+we should make sure we're using the same basis functions for the main effects and the interactions for the same variable **for example bs = "ds" for LONGITUDE LATITUDE**
+
+## 79
+reasonable null model that just has the effect of climate change
+
+## 81 
+
+clearly the spatial model is much better than the null model
+
+## 83
+
+probably a problem with the data in the figure in the top right the temperature would not increase that fast and settle back down that fast
+
+## 84
+
+with the development version of gratia you can make theses plots 
+
+DOY seems to be the variable with the most effect here
+
+time of day seems to have the smallest effect since it has the smallest range
+
+## 85 
+
+data slice TOD = 12 and DOY 180
+
+so we're fixing the time of day and the day of year so that we can predict the spatial effects
+
+## 89 
+
+lets pick a point of the bay and we want to see the trends at that point at different days of the year
+
+## 90
+
+seems to be a trend in the fall where the temperature is increasing 
+
+
+

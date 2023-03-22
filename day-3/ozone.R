@@ -73,6 +73,8 @@ b1 <- basis(s(temp), data = ozone)
 b0 <- basis(s(temp, m = c(2, 0)), data = ozone)
 wrap_plots(draw(b1) + labs(subtitle = "With a null space"),
     draw(b0) + labs(subtitle = "Without a null space"), ncol = 2)
+# removes the linear basis function and modifying all the other basis functions 
+
 
 # Is the smooth of temperature adding anything?
 m2 <- gam(O3 ~ temp + s(temp, m = c(2, 0)) + s(ibh) + s(ibt),
@@ -92,7 +94,7 @@ sm_s_temp <- smooth_estimates(m2, "s(temp)")
 # and plot it with the 50 posterior draws
 draw(sm_s_temp) +
     geom_line(data = samp_s_temp,
-        aes(y = value, x = .x1, group = draw),
+        aes(y = value, x = temp, group = draw),
     alpha = 0.3, colour = "steelblue", size = 1)
 
 # diagnostics
