@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Description
 
-The data set `belgium.csv` contains the number of cases (`cases`) of AIDS recorded between 1981 and 1993 (`year`) in Belgium
+The data set `belgium-aids.csv` contains the number of cases (`cases`) of AIDS recorded between 1981 and 1993 (`year`) in Belgium
 
 ## Packages
 
@@ -38,7 +38,7 @@ belgium
 
 ## Data wrangling
 
-Create a variables `t` (for time) in the `belgium` data frame, which contains the time point of observation by subtracting `1980` from each `year`:
+Create a variable `t` (for time) in the `belgium` data frame, which contains the time point of observation by subtracting `1980` from each `year`:
 
 ```{r wrangling}
 belgium <- belgium %>%
@@ -112,6 +112,7 @@ ggplot(aes(x = year, y = cases)) +
 
 8. Modify your model to account for the identified problem
 
+<<<<<<< HEAD
     Hint: use ploynomials of `t`
 
 ```{r}
@@ -121,6 +122,9 @@ m2 <- glm(cases ~ poly(t, 2), data = belgium, family = poisson(link = "log"))
 
 m2b <- update(m1, . ~ . + I(t^2)) #this is less stable numerically so the first option is a bit better
 ```
+=======
+    Hint: use polynomials of `t` using `poly()`
+>>>>>>> d5c6e59781b1567d0eb96b06832e6a32a54c0e9c
 
 9. Look at the model summary, model diagnostic plots, and perform the goodness of fit test on the residual deviance. Are there any problems with this model?
 

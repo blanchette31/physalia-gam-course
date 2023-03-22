@@ -99,6 +99,7 @@ null_dev <- summ$null.deviance
 
 4. Calculate a quick goodness of fit test for the model using the information provided on the residual deviance
 
+<<<<<<< HEAD
 ```{r gof-test}
 pchisq(deviance(m_ck), df.residual(m_ck), lower.tail = FALSE)
 
@@ -106,6 +107,9 @@ pchisq(deviance(m_ck), df.residual(m_ck), lower.tail = FALSE)
 ```
 very small probability that we would have a deviance this large and thus the model is poorly fitted for the data
 
+=======
+    Hint: the residual device should be a typical value from a $\chi^2$ distributed random variable with degress of freedom equal to the residual degrees of freedom of the model. You'll need `pchisq()`, `deviance()`, and `df.residual()`&hellip;
+>>>>>>> d5c6e59781b1567d0eb96b06832e6a32a54c0e9c
 
 5. Plot the model diagnostics
 
