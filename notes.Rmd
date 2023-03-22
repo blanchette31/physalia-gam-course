@@ -32,8 +32,32 @@ Slides :
 ## 8
 Test to figure out if a non linear model is suitable for the data but in Gavin's opinion we should not have to do this because the penalty will not allow over wiggliness.
 
+```{r}
+library(tidyverse)
+library(mgcv)
+n <- 100
+set.seed(2)
+df <- tibble(x = runif(n),
+             y = x + x^2 * 0.2 + rnorm(n) * 0.1)
+model <- gam(y ~ x + s(x, m = c(2, 0)),
+             data = df, method = "REML")
+model2 <- gam(y ~ s(x),
+             data = df, method = "REML")
+
+summary(model)
+summary(model2)
+```
+
+
 ## 11
 not all of the smooths can be used to estimate the second derivative as the penalty makes the second derivative as small as possible
 
 
 
+## 21
+
+Why the thin plate spline doesn't work when the scale on x and z is different but the tensor product is much better for this case
+
+
+## 25 
+Last line : make sure that the data in place of "f" is a factor if not you will get a cryptic error message
