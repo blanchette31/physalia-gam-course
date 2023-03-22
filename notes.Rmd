@@ -9,6 +9,7 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
 ## Notes for GAMs course
 
 # Day 1
@@ -61,3 +62,84 @@ Why the thin plate spline doesn't work when the scale on x and z is different bu
 
 ## 25 
 Last line : make sure that the data in place of "f" is a factor if not you will get a cryptic error message
+
+
+## 37
+
+we should look to see if there's a difference between k' and edf and if k-index is low (unmodelled wigliness) 
+
+if the k index is too low it means that the values near each other aren't similar we want the k-index to be greater than one or at least close (if its close check the p-value if not don't worry about the p-value too much)
+
+## 38
+s(x2) doesnt have enough degrees of freedom now that s(x1) is figured out and has enough degrees of freedom
+
+s(x2) edf and k' are good (there is enough head room in terms of k for the)
+
+## 40 
+
+we need more degrees of freedom to force the curve to go flat (slope is changing faster more often so we need more degrees of freedom)
+
+## 41
+
+there a 2 scenarios where this test will fail
+
+## 42 
+k-index is not the same here as we saw before
+
+## 43
+
+fitting gam model to residuals 
+
+if we had the basis size correct the edfs should be 1 here they are not
+
+## 45
+
+model diagnostics we need to do if we are to validate any model
+
+## 47
+
+3. can help us diagnose non constant variance
+
+##48
+
+here is what happens when we have the correct model
+
+rep = 500 : simulates 500 new data sets from the model using the fitted values
+
+if your data looks like a typical example from the model then your model is good
+
+you want all your points to be on line line in the first graph you can expect some variation though
+
+second graph : if there is an increase in spread if we increase the mean of the residuals then we have the wrong mean residuals relationship **It should be constant**
+
+## 49
+
+example of bad model fit overdispersion 
+
+plot 3 is too fat in the tails and we can see the same thing in the first plot 
+
+## 51
+
+do the same thing as before but using ggplot
+
+## 55
+
+here we have the wrong family so we have overdispersion and we are testing for that 
+
+our dispersion should be 1 so its very overdispersed p-value is significant so does not support the null hypothesis that it is correctly dispersed
+
+## 56
+no sign that the data and model are different in terms of their dispersions
+
+## 57
+
+takes our fitted model and simulates residuals and we can do other tests
+
+## 58 
+
+KS test tells us if we have the correct distribution significant means we dont have the correct family
+
+## 59 
+
+this is what good model diagnostics looks like
+
