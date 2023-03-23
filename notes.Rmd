@@ -215,4 +215,19 @@ lets pick a point of the bay and we want to see the trends at that point at diff
 seems to be a trend in the fall where the temperature is increasing 
 
 
+# Day 4
+
+Slides : 
+
+## 11 
+
+you should probably use this if it is available to use (REML AND ML)
+
+## 19 
+we should not be relying on p-values to make decisions according to statisticians we're over relying on them
+
+if the effect is significant and the variable is biologically important then you should keep it regardless of p-value 
+
+
+
 
