@@ -228,6 +228,6 @@ we should not be relying on p-values to make decisions according to statistician
 
 if the effect is significant and the variable is biologically important then you should keep it regardless of p-value 
 
-
+## 
 
 
