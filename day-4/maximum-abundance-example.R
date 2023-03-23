@@ -1,7 +1,7 @@
 # Analyse the simulated species abundance data
 
 # load packages
-pkgs <- c("mgcv", "ggplot2", "readr", "dplyr", "gratia")
+pkgs <- c("mgcv", "ggplot2", "readr", "dplyr", "gratia", "tidyverse")
 vapply(pkgs, library, logical(1), character.only = TRUE, logical.return = TRUE,
        quietly = TRUE)
 
@@ -26,17 +26,22 @@ draw(max_nb)
 
 max_p <- update(max_nb, . ~ ., family = poisson())
 
+summary(max_p)
 draw(max_p)
 
+#max p uses slightly less degrees of freedom than max_nb and slightly lower AIC
 AIC(max_nb, max_p)
+
+appraise(max_p, method = "simulate")
+gam.check(max_p)
 
 nb_theta(max_nb)
 
 ## step 2
 new_df <- with(gradient,
-               tibble(environment = seq_min_max(environment, n = 200)))
+               tibble(environment = evenly(environment, n = 200)))
 
-fs <- fitted_samples(max_p, n = 10000, newdata = new_df,
+fs <- fitted_samples(max_p, n = 10000, data = new_df,
                      seed = 42)
 
 ## a function to find the env value where abundance is maximum
@@ -56,7 +61,7 @@ summ <- max_post %>%
 summ
 
 summ <- summ %>%
-  mutate(abundance = 0)
+  mutate(abundance = 25)
 
 ## plot
 gradient %>%
@@ -65,3 +70,4 @@ gradient %>%
   geom_pointrange(data = summ,
                   aes(y = abundance, x = median,
                       xmax = q97.5, xmin = q2.5), col = "red")
+

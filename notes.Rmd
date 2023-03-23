@@ -228,6 +228,84 @@ we should not be relying on p-values to make decisions according to statistician
 
 if the effect is significant and the variable is biologically important then you should keep it regardless of p-value 
 
-## 
+## 42
+
+no advantage to fitting this model if there is no trend at a population level 
+
+it's more of an average smooth 
+
+## 45
+
+we decompose the average effect and then how individuals respond differently from the common pattern
+
+if there is a common pattern it can be beneficial (simpler more parsimonious, aka few degrees of freedom, model) to model a hierarchial gam to get the common pattern and then how individuals differ from that common pattern
+
+## 49
+
+average species richness over the whole area over time according to hte model 
+
+we can see that it oscillates
+
+## 50
+
+we would like to allow a spatial smoothness
+
+## 51
+
+controlling the degrees of freedom in each direction
+
+tw family because the biomass can be 0 and it is really good for that  continuous observation that can be skewed
+
+## 52
+
+how we can get meaningful results from our model
+
+we would ideally like to get predictions 
+
+## 53
+
+this model ignores space so it's not correct right now but it's just an example 
+
+new_year : take the minimum year and max year and give 100 values in between them and then we can predict from that new dataframe
+
+this is all in the log scale so we need to back transform this data to the response scale
+
+crit = 89% confidence interval
+
+## 55
+
+the bands are probably wrong because the species richness is probably spatially auto-correlated because we're not taking into account spatial distribution 
+
+## 56
+
+sp_new = 100 new evenly distributed x and y coordonates for each year
+
+## 57 
+
+remove created coordonates that are on land using exclude.too.far and providing the original data
+
+## 61
+
+you have to use the smooths function to know what the name of the smooths are so that we can exclude them from the predict 
+
+## 62 
+
+exclude = remove the smooths we dont want to predict with so this model will just model the average biomass over time 
+
+## 64
+
+we can use the fitted_values function in gratia to do all the previous code for simple models and we dont have to worry about the confidence intervals and back transforming them 
+
+## 65 
+
+simulate data from the model
+
+## 82
+
+you should simulate at least 10000 or 50000 in beta_sim <- here he used 1000 just so sit runs a bit faster 
+
+
+
+
 
 

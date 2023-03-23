@@ -47,12 +47,16 @@ m1_hgam <- gam(response ~ s(time, k = K) +
 m2_hgam <- gam(response ~ s(time, treatment, bs = "fs", k = K) +
                   s(subject, bs = "re"),
                data = rats, method = "REML")
+#shared wigglyness but no common trend between the different groups 
 
 ## this is Model I at the treatment level
 m3_hgam <- gam(response ~ treatment +
                  s(time, by = treatment, k = K) +
                  s(subject, bs = "re"),
                data = rats, method = "REML")
+# here they dont have the same wigglyness that's the difference between 2 and 3
+
+
 
 ## this is Model GI at the treatment level
 m4_hgam <- gam(response ~ treatment + s(time, k = K) +
@@ -80,6 +84,8 @@ m7_hgam <- gam(response ~ s(time, treatment, bs = "fs", k = K) +
 
 ## This is Model S smooths only at the lowest subject level
 m8_hgam <- gam(response ~ s(time, subject, bs = "fs", k =5), # not enough data for more
+# nothing telling us that there's a common trend at the group or treatment level its purely modelling each individual rat
+
                data = rats, method = "REML")
 
 AIC(m1_hgam, m2_hgam, m3_hgam, m4_hgam, m5_hgam, m6_hgam, m7_hgam, m8_hgam) %>%
@@ -89,11 +95,17 @@ AIC(m1_hgam, m2_hgam, m3_hgam, m4_hgam, m5_hgam, m6_hgam, m7_hgam, m8_hgam) %>%
          "SGS", "S"),
       .before = 1L) %>%
    arrange(AIC)
+# here the m2 and m3 are the best and there seems to be no advantage to account for an average top-level effect (overall trend between the groups)
+#model 8 has uses much more df because it models each individual rat and theres no treatment level effect
+
+#hopefully you can bring in your own information so you wont have to do all of these models 
 
 # plot the best models
 draw(m2_hgam)
 
 draw(m3_hgam)
+
+draw(m3_hgam, residuals = TRUE, rug = FALSE, grouped_by = TRUE)
 
 draw(m4_hgam)
 
