@@ -19,7 +19,7 @@ rats <- rats %>%
                                   High = "2",
                                   Control = "3"),
            treatment = fct_relevel(treatment, c("Control", "Low", "High")),
-           subject = factor(subject))
+           subject = factor(subject)) #we want the subject to be a factor and not a number to have a random intercept rather than a random slope when we compute the gam
 
 rats %>%
     na.omit() %>%
