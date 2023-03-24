@@ -4,6 +4,10 @@
 
 https://www.physalia-courses.org/
 
+## Free interactive GAMs course by Noam Ross
+
+https://noamross.github.io/gams-in-r-course/ <- great introduction to GAMs before looking at this course material
+
 ### Gavin Simpson
 
 #### 20&ndash;24th March, 2023
