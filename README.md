@@ -18,7 +18,7 @@ https://noamross.github.io/gams-in-r-course/ <- **great introduction to GAMs bef
 
 2. Select : "Download ZIP".
 
-3. **Make sure to extract the whole folder onto your computer as opening the files directly from the zip will cause problems.*
+3. **Make sure to extract the whole folder onto your computer as opening the files directly from the zip will cause problems.**
 
 ## Overview
 
