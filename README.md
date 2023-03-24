@@ -18,6 +18,8 @@ https://noamross.github.io/gams-in-r-course/ <- **great introduction to GAMs bef
 
 2. Select : "Download ZIP".
 
+3. **Make sure to extract the whole folder onto your computer as opening the files directly from the zip will cause problems.*
+
 ## Overview
 
 Most of the statistical methods you are likely to have encountered will have specified fixed functional forms for the relationships between covariates and the response, either implicitly or explicitly. These might be linear effects or involve polynomials, such as x + x<sup>2</sup> + x<sup>3</sup>. Generalised additive models (GAMs) are different; they build upon the generalised linear model by allowing the shapes of the relationships between response and covariates to be learned from the data using splines. Modern GAMs, it turns out, are a very general framework for data analysis, encompassing many models as special cases, including GLMs and GLMMs, and the variety of types of splines available to users allows GAMs to be used in a surprisingly large number of situations. In this course we’ll show you how to leverage the power and flexibility of splines to go beyond parametric modelling techniques like GLMs.
